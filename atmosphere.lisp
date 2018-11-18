@@ -14,7 +14,7 @@
 (defconstant R-air 287.05287 "specific gas constant for air, in J/kg K")
 (defconstant base-viscosity 0.000017894 "dynamic viscosity at sea level, kg/m s")
 (defconstant Sutherland 110 "Sutherland's constant, Kelvin")
-(defconstant gamma 1.4 "ratio of specific heats, air")
+(defconstant gamma 1.402 "ratio of specific heats, air")
 
 ;; temperature at 0 m MSL is +15.0 degrees
 (defun temperature (h)
@@ -25,7 +25,7 @@
   (expt
    (/ (temperature h) base-temperature)
    (/ (* -1 standard-gravity)
-g      (* lapse-rate R-air))))
+      (* lapse-rate R-air))))
 
 ;; density at MSL is 1.2250 kg/m^3
 (defun density-air (h)
@@ -37,9 +37,10 @@ g      (* lapse-rate R-air))))
 (defun viscosity (h)
   (*
    base-viscosity
-   (expt (/ (temperature h)
-	    base-temperature)
-	 1.5)
+   (expt
+    (/ (temperature h)
+       base-temperature)
+    1.5)
    (/ (+ base-temperature Sutherland)
       (+ (temperature h) Sutherland))))
 
